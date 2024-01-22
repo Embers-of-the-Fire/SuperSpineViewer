@@ -78,13 +78,13 @@ public abstract class RecordFX {
 
             if (Runtime.getRuntime().exec(new String[]{
                 "ffmpeg", "-r", "60",
-                "-i", STR."\{Main.outPath}\{fileName}_Sequence\{File.separator}\{fileName}_%d.png",
+                "-i", STR."\{Main.outPath}\{File.separator}\{fileName}_Sequence\{File.separator}\{fileName}_%d.png",
                 "-c:v", "png", "-pix_fmt", "rgba",
                 "-filter:v", STR."\"setpts=\{Main.quality}*PTS\"",
                 "-nostdin", "-y", "-loglevel", "quiet",
                 STR."\{Main.outPath}\{fileName}.mov"
             }, new String[]{System.getProperty("user.dir")}).waitFor() == 0) {
-                File sequence = new File(STR."\{Main.outPath}\{fileName}_Sequence\{File.separator}");
+                File sequence = new File(STR."\{Main.outPath}\{File.separator}\{fileName}_Sequence\{File.separator}");
 
                 for (File file : Objects.requireNonNull(sequence.listFiles())) {
                     file.deleteOnExit();
@@ -147,7 +147,7 @@ public abstract class RecordFX {
 
     private static void writePNG(final WritableImage image, final short index) {
         try {
-            File outputFile = new File(STR."\{Main.outPath}\{fileName}_Sequence\{File.separator}\{fileName}_\{index}.png");
+            File outputFile = new File(STR."\{Main.outPath}\{File.separator}\{fileName}_Sequence\{File.separator}\{fileName}_\{index}.png");
             outputFile.getParentFile().mkdirs();
             outputFile.createNewFile();
 
