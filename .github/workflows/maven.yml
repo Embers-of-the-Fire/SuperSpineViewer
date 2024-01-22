@@ -17,6 +17,7 @@ jobs:
         with:
           java-version: 21
           architecture: x64
+          distribution: oracle
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
